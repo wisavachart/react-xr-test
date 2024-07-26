@@ -2,14 +2,6 @@ import { useState } from "react";
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import { XR, createXRStore } from "@react-three/xr";
-import {
-  useGLTF,
-  PresentationControls,
-  Environment,
-  ContactShadows,
-  Html,
-} from "@react-three/drei";
-
 const store = createXRStore();
 function App() {
   const [red, setRed] = useState(false);
@@ -26,9 +18,14 @@ function App() {
       </button>
       <Canvas>
         <XR store={store}>
-          <Html>
-            <button>กดสิ</button>
-          </Html>
+          {show && (
+            <group onClick={() => setRed(!red)}>
+              <mesh pointerEventsType={{ deny: "grab" }} position={[0, 1, -1]}>
+                <boxGeometry />
+                <meshBasicMaterial color={red ? "red" : "blue"} />
+              </mesh>
+            </group>
+          )}
         </XR>
       </Canvas>
     </>
