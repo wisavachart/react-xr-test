@@ -19,10 +19,7 @@ function App() {
       <Canvas>
         <XR store={store}>
           {show && (
-            <mesh
-              pointerEventsType={{ deny: "grab" }}
-              onClick={() => setRed(!red)}
-              position={[0, 1, -1]}>
+            <mesh onClick={() => setRed(!red)} position={[0, 1, -1]}>
               <boxGeometry />
               <meshBasicMaterial color={red ? "red" : "blue"} />
             </mesh>
