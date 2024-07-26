@@ -1,27 +1,23 @@
-import { Canvas } from "@react-three/fiber";
-import { XR, Interactive, createXRStore } from "@react-three/xr";
 import { useState } from "react";
-
+import "./App.css";
+import { Canvas } from "@react-three/fiber";
+import { XR, createXRStore } from "@react-three/xr";
 const store = createXRStore();
-
 function App() {
   const [red, setRed] = useState(false);
 
   return (
     <>
       <button onClick={() => store.enterAR()}>Enter AR</button>
-      <Canvas sessioninit={{ requiredFeatures: ["hit-test"] }}>
+      <Canvas>
         <XR store={store}>
-          <Interactive onSelect={() => setRed(!red)}>
-            <mesh position={[0, 1, -1]}>
-              <boxGeometry />
-              <meshBasicMaterial color={red ? "red" : "blue"} />
-            </mesh>
-          </Interactive>
+          <mesh onClick={() => setRed(!red)} position={[0, 1, -1]}>
+            <boxGeometry />
+            <meshBasicMaterial color={red ? "red" : "blue"} />
+          </mesh>
         </XR>
       </Canvas>
     </>
   );
 }
-
 export default App;
